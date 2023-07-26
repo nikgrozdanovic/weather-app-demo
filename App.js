@@ -5,6 +5,8 @@ import { ActivityIndicator } from 'react-native'
 import { View, StyleSheet } from 'react-native'
 import { useGetWeather } from './src/hooks/useGetWeather'
 import ErrorItem from './src/components/ErrorItem'
+import { Provider } from 'react-redux'
+import { store } from './src/redux/store'
 
 const App = () => {
   const [loading, error, weather] = useGetWeather()
@@ -12,7 +14,7 @@ const App = () => {
   if (weather && weather.list && !loading) {
     return (
       <NavigationContainer>
-        <Tabs weather={weather} />
+        <Tabs />
       </NavigationContainer>
     )
   }

@@ -3,8 +3,12 @@ import { View, Text, SafeAreaView, StyleSheet } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 import RowText from '../components/RowText'
 import { weatherType } from '../utilities/weatherType'
+import { useSelector } from 'react-redux'
 
-const CurrentWeather = ({ weatherData }) => {
+const CurrentWeather = () => {
+  const storedWeatherData = useSelector((state) => state.weatherData.value)
+  const weatherData = storedWeatherData.list[0]
+
   const {
     container,
     tempri,

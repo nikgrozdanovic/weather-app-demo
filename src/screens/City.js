@@ -9,8 +9,11 @@ import {
 } from 'react-native'
 import moment from 'moment'
 import IconText from '../components/IconText'
+import { useSelector } from 'react-redux'
 
-const City = ({ weatherData }) => {
+const City = () => {
+  const storedWeatherData = useSelector((state) => state.weatherData.value)
+  const weatherData = storedWeatherData.city
   const {
     container,
     cityName,

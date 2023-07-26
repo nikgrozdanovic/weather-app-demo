@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import * as Location from 'expo-location'
 import { WEATHER_API_KEY } from '@env'
+import { useDispatch } from 'react-redux'
+import { getWeatherData } from '../redux/features/WeatherDataSlice'
 
 export const useGetWeather = () => {
   const [loading, setLoading] = useState(true)
@@ -9,12 +11,15 @@ export const useGetWeather = () => {
   const [lat, setLat] = useState([])
   const [lon, setLon] = useState([])
 
+  const dispatch = useDispatch()
+
   const fetchWeatherData = async () => {
     try {
       const res = await fetch(
         `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`
       )
       const data = await res.json()
+      dispatch(getWeatherData(data))
       setWeather(data)
     } catch (error) {
       setError('Could not fetch weather.')

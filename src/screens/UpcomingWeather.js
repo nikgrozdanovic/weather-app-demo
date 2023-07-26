@@ -9,8 +9,11 @@ import {
   ImageBackground,
 } from 'react-native'
 import ListItem from '../components/ListItem'
+import { useSelector } from 'react-redux'
 
-const UpcomingWeather = ({ weatherData }) => {
+const UpcomingWeather = () => {
+  const storedWeatherData = useSelector((state) => state.weatherData.value)
+  const weatherData = storedWeatherData.list
   const { container, image } = styles
   const renderItem = ({ item }) => (
     <ListItem
